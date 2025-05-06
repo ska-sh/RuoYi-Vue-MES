@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.material.mapper.BaseMaterialMapper">
+    
+    <resultMap type="BaseMaterial" id="BaseMaterialResult">
+        <result property="id"    column="id"    />
+        <result property="code"    column="code"    />
+        <result property="name"    column="name"    />
+        <result property="figureNumber"    column="figure_number"    />
+        <result property="type"    column="type"    />
+        <result property="materialResourceDict"    column="material_resource_dict"    />
+        <result property="model"    column="model"    />
+        <result property="specification"    column="specification"    />
+        <result property="materialWarehouseCode"    column="material_warehouse_code"    />
+        <result property="stockUnitDict"    column="stock_unit_dict"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectBaseMaterialVo">
+        select id, code, name, figure_number, type, material_resource_dict, model, specification, material_warehouse_code, stock_unit_dict, status, del_flag, create_by, create_time, update_by, update_time, remark from base_material
+    </sql>
+
+    <select id="selectBaseMaterialList" parameterType="BaseMaterial" resultMap="BaseMaterialResult">
+        <include refid="selectBaseMaterialVo"/>
+        <where>  
+            <if test="code != null  and code != ''"> and code like concat('%', #{code}, '%')</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="figureNumber != null  and figureNumber != ''"> and figure_number = #{figureNumber}</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="materialResourceDict != null  and materialResourceDict != ''"> and material_resource_dict = #{materialResourceDict}</if>
+            <if test="model != null  and model != ''"> and model = #{model}</if>
+            <if test="specification != null  and specification != ''"> and specification = #{specification}</if>
+            <if test="materialWarehouseCode != null  and materialWarehouseCode != ''"> and material_warehouse_code = #{materialWarehouseCode}</if>
+            <if test="stockUnitDict != null  and stockUnitDict != ''"> and stock_unit_dict = #{stockUnitDict}</if>
+        </where>
+    </select>
+    
+    <select id="selectBaseMaterialById" parameterType="Long" resultMap="BaseMaterialResult">
+        <include refid="selectBaseMaterialVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBaseMaterial" parameterType="BaseMaterial" useGeneratedKeys="true" keyProperty="id">
+        insert into base_material
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="code != null and code != ''">code,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="figureNumber != null">figure_number,</if>
+            <if test="type != null and type != ''">type,</if>
+            <if test="materialResourceDict != null and materialResourceDict != ''">material_resource_dict,</if>
+            <if test="model != null">model,</if>
+            <if test="specification != null">specification,</if>
+            <if test="materialWarehouseCode != null and materialWarehouseCode != ''">material_warehouse_code,</if>
+            <if test="stockUnitDict != null and stockUnitDict != ''">stock_unit_dict,</if>
+            <if test="status != null">status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="code != null and code != ''">#{code},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="figureNumber != null">#{figureNumber},</if>
+            <if test="type != null and type != ''">#{type},</if>
+            <if test="materialResourceDict != null and materialResourceDict != ''">#{materialResourceDict},</if>
+            <if test="model != null">#{model},</if>
+            <if test="specification != null">#{specification},</if>
+            <if test="materialWarehouseCode != null and materialWarehouseCode != ''">#{materialWarehouseCode},</if>
+            <if test="stockUnitDict != null and stockUnitDict != ''">#{stockUnitDict},</if>
+            <if test="status != null">#{status},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseMaterial" parameterType="BaseMaterial">
+        update base_material
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="code != null and code != ''">code = #{code},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="figureNumber != null">figure_number = #{figureNumber},</if>
+            <if test="type != null and type != ''">type = #{type},</if>
+            <if test="materialResourceDict != null and materialResourceDict != ''">material_resource_dict = #{materialResourceDict},</if>
+            <if test="model != null">model = #{model},</if>
+            <if test="specification != null">specification = #{specification},</if>
+            <if test="materialWarehouseCode != null and materialWarehouseCode != ''">material_warehouse_code = #{materialWarehouseCode},</if>
+            <if test="stockUnitDict != null and stockUnitDict != ''">stock_unit_dict = #{stockUnitDict},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseMaterialById" parameterType="Long">
+        delete from base_material where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseMaterialByIds" parameterType="String">
+        delete from base_material where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
