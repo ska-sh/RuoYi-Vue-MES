@@ -77,7 +77,7 @@ public class BaseMaterialController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody BaseMaterial baseMaterial)
     {
-        return toAjax(baseMaterialService.insertBaseMaterial(baseMaterial));
+        return baseMaterialService.insertBaseMaterial(baseMaterial);
     }
 
     /**

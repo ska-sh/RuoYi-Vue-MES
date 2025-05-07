@@ -47,6 +47,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectBaseMaterialVo"/>
         where id = #{id}
     </select>
+    <select id="selectBaseMaterialByCode" resultType="com.ruoyi.material.domain.BaseMaterial">
+        <include refid="selectBaseMaterialVo"/>
+        where code = #{code}
+    </select>
 
     <insert id="insertBaseMaterial" parameterType="com.ruoyi.material.domain.BaseMaterial" useGeneratedKeys="true" keyProperty="id">
         insert into base_material

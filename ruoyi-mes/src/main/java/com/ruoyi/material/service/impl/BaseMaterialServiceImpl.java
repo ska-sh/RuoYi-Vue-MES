@@ -1,6 +1,8 @@
 package com.ruoyi.material.service.impl;
 
 import java.util.List;
+
+import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,11 +54,17 @@ public class BaseMaterialServiceImpl implements IBaseMaterialService
      * @return 结果
      */
     @Override
-    public int insertBaseMaterial(BaseMaterial baseMaterial)
+    public AjaxResult insertBaseMaterial(BaseMaterial baseMaterial)
     {
+        BaseMaterial record = baseMaterialMapper.selectBaseMaterialByCode(baseMaterial.getCode());
+        if(record != null){
+            return AjaxResult.error(baseMaterial.getCode()+"编号已存在!");
+        }
+
         baseMaterial.setCreateTime(DateUtils.getNowDate());
         baseMaterial.setCreateBy(SecurityUtils.getLoginUser().getUsername());
-        return baseMaterialMapper.insertBaseMaterial(baseMaterial);
+        int rows = baseMaterialMapper.insertBaseMaterial(baseMaterial);
+        return rows > 0 ? AjaxResult.success() : AjaxResult.error();
     }
 
     /**

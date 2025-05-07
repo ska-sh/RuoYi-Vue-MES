@@ -19,6 +19,8 @@ public interface BaseMaterialMapper
      */
     public BaseMaterial selectBaseMaterialById(Long id);
 
+    BaseMaterial selectBaseMaterialByCode(String code);
+
     /**
      * 查询物料管理列表
      * 

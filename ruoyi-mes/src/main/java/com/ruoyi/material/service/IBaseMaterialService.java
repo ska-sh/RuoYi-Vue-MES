@@ -1,6 +1,8 @@
 package com.ruoyi.material.service;
 
 import java.util.List;
+
+import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.material.domain.BaseMaterial;
 
 /**
@@ -33,7 +35,7 @@ public interface IBaseMaterialService
      * @param baseMaterial 物料管理
      * @return 结果
      */
-    public int insertBaseMaterial(BaseMaterial baseMaterial);
+    public AjaxResult insertBaseMaterial(BaseMaterial baseMaterial);
 
     /**
      * 修改物料管理

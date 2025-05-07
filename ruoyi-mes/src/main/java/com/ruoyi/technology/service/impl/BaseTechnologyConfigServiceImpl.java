@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.technology.mapper.BaseTechnologyConfigMapper;
@@ -57,9 +58,10 @@ public class BaseTechnologyConfigServiceImpl implements IBaseTechnologyConfigSer
     {
         BaseTechnologyConfig record = baseTechnologyConfigMapper.selectOneByCode(baseTechnologyConfig.getCode());
         if(record != null){
-            return AjaxResult.error(baseTechnologyConfig.getCode()+"已存在!");
+            return AjaxResult.error(baseTechnologyConfig.getCode()+"编号已存在!");
         }
         baseTechnologyConfig.setCreateTime(DateUtils.getNowDate());
+        baseTechnologyConfig.setCreateBy(SecurityUtils.getLoginUser().getUsername());
         int rows = baseTechnologyConfigMapper.insertBaseTechnologyConfig(baseTechnologyConfig);
         return rows > 0 ? AjaxResult.success() : AjaxResult.error();
     }
@@ -74,6 +76,7 @@ public class BaseTechnologyConfigServiceImpl implements IBaseTechnologyConfigSer
     public int updateBaseTechnologyConfig(BaseTechnologyConfig baseTechnologyConfig)
     {
         baseTechnologyConfig.setUpdateTime(DateUtils.getNowDate());
+        baseTechnologyConfig.setUpdateBy(SecurityUtils.getLoginUser().getUsername());
         return baseTechnologyConfigMapper.updateBaseTechnologyConfig(baseTechnologyConfig);
     }
 
