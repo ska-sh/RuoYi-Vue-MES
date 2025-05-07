@@ -2,6 +2,7 @@ package com.ruoyi.partner.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.partner.mapper.BaseSupplierMapper;
@@ -54,6 +55,7 @@ public class BaseSupplierServiceImpl implements IBaseSupplierService
     public int insertBaseSupplier(BaseSupplier baseSupplier)
     {
         baseSupplier.setCreateTime(DateUtils.getNowDate());
+        baseSupplier.setCreateBy(SecurityUtils.getLoginUser().getUsername());
         return baseSupplierMapper.insertBaseSupplier(baseSupplier);
     }
 
@@ -67,6 +69,7 @@ public class BaseSupplierServiceImpl implements IBaseSupplierService
     public int updateBaseSupplier(BaseSupplier baseSupplier)
     {
         baseSupplier.setUpdateTime(DateUtils.getNowDate());
+        baseSupplier.setUpdateBy(SecurityUtils.getLoginUser().getUsername());
         return baseSupplierMapper.updateBaseSupplier(baseSupplier);
     }
 
