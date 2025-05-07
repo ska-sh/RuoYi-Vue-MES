@@ -2,6 +2,7 @@ package com.ruoyi.material.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.material.mapper.BaseMaterialMapper;
@@ -54,6 +55,7 @@ public class BaseMaterialServiceImpl implements IBaseMaterialService
     public int insertBaseMaterial(BaseMaterial baseMaterial)
     {
         baseMaterial.setCreateTime(DateUtils.getNowDate());
+        baseMaterial.setCreateBy(SecurityUtils.getLoginUser().getUsername());
         return baseMaterialMapper.insertBaseMaterial(baseMaterial);
     }
 
