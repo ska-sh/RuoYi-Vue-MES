@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.material.mapper.BaseMaterialMapper">
     
-    <resultMap type="BaseMaterial" id="BaseMaterialResult">
+    <resultMap type="com.ruoyi.material.domain.BaseMaterial" id="BaseMaterialResult">
         <result property="id"    column="id"    />
         <result property="code"    column="code"    />
         <result property="name"    column="name"    />
@@ -28,7 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select id, code, name, figure_number, type, material_resource_dict, model, specification, material_warehouse_code, stock_unit_dict, status, del_flag, create_by, create_time, update_by, update_time, remark from base_material
     </sql>
 
-    <select id="selectBaseMaterialList" parameterType="BaseMaterial" resultMap="BaseMaterialResult">
+    <select id="selectBaseMaterialList" parameterType="com.ruoyi.material.domain.BaseMaterial" resultMap="BaseMaterialResult">
         <include refid="selectBaseMaterialVo"/>
         <where>  
             <if test="code != null  and code != ''"> and code like concat('%', #{code}, '%')</if>
@@ -48,7 +48,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </select>
 
-    <insert id="insertBaseMaterial" parameterType="BaseMaterial" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertBaseMaterial" parameterType="com.ruoyi.material.domain.BaseMaterial" useGeneratedKeys="true" keyProperty="id">
         insert into base_material
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="code != null and code != ''">code,</if>
@@ -88,7 +88,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updateBaseMaterial" parameterType="BaseMaterial">
+    <update id="updateBaseMaterial" parameterType="com.ruoyi.material.domain.BaseMaterial">
         update base_material
         <trim prefix="SET" suffixOverrides=",">
             <if test="code != null and code != ''">code = #{code},</if>

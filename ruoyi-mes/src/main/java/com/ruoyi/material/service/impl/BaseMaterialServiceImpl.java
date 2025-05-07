@@ -69,6 +69,7 @@ public class BaseMaterialServiceImpl implements IBaseMaterialService
     public int updateBaseMaterial(BaseMaterial baseMaterial)
     {
         baseMaterial.setUpdateTime(DateUtils.getNowDate());
+        baseMaterial.setUpdateBy(SecurityUtils.getLoginUser().getUsername());
         return baseMaterialMapper.updateBaseMaterial(baseMaterial);
     }
 
