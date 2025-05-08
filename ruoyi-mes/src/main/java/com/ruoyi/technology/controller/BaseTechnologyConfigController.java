@@ -25,10 +25,10 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * 基础工艺Controller
  * 
  * @author 蜗牛
- * @date 2025-05-07
+ * @date 2025-05-08
  */
 @RestController
-@RequestMapping("/technology/config")
+@RequestMapping("/technology/technology")
 public class BaseTechnologyConfigController extends BaseController
 {
     @Autowired
@@ -37,7 +37,7 @@ public class BaseTechnologyConfigController extends BaseController
     /**
      * 查询基础工艺列表
      */
-    @PreAuthorize("@ss.hasPermi('technology:config:list')")
+    @PreAuthorize("@ss.hasPermi('technology:technology:list')")
     @GetMapping("/list")
     public TableDataInfo list(BaseTechnologyConfig baseTechnologyConfig)
     {
@@ -49,7 +49,7 @@ public class BaseTechnologyConfigController extends BaseController
     /**
      * 导出基础工艺列表
      */
-    @PreAuthorize("@ss.hasPermi('technology:config:export')")
+    @PreAuthorize("@ss.hasPermi('technology:technology:export')")
     @Log(title = "基础工艺", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, BaseTechnologyConfig baseTechnologyConfig)
@@ -62,7 +62,7 @@ public class BaseTechnologyConfigController extends BaseController
     /**
      * 获取基础工艺详细信息
      */
-    @PreAuthorize("@ss.hasPermi('technology:config:query')")
+    @PreAuthorize("@ss.hasPermi('technology:technology:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -72,7 +72,7 @@ public class BaseTechnologyConfigController extends BaseController
     /**
      * 新增基础工艺
      */
-    @PreAuthorize("@ss.hasPermi('technology:config:add')")
+    @PreAuthorize("@ss.hasPermi('technology:technology:add')")
     @Log(title = "基础工艺", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody BaseTechnologyConfig baseTechnologyConfig)
@@ -83,7 +83,7 @@ public class BaseTechnologyConfigController extends BaseController
     /**
      * 修改基础工艺
      */
-    @PreAuthorize("@ss.hasPermi('technology:config:edit')")
+    @PreAuthorize("@ss.hasPermi('technology:technology:edit')")
     @Log(title = "基础工艺", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody BaseTechnologyConfig baseTechnologyConfig)
@@ -94,7 +94,7 @@ public class BaseTechnologyConfigController extends BaseController
     /**
      * 删除基础工艺
      */
-    @PreAuthorize("@ss.hasPermi('technology:config:remove')")
+    @PreAuthorize("@ss.hasPermi('technology:technology:remove')")
     @Log(title = "基础工艺", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
