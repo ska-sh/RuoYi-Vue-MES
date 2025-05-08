@@ -30,12 +30,12 @@ public class BaseMaterial extends BaseEntity
     @Excel(name = "图号")
     private String figureNumber;
 
-    /** 物料类别(material_category_code) */
-    @Excel(name = "物料类别(material_category_code)")
+    /** 物料类别 */
+    @Excel(name = "物料类别")
     private String type;
 
-    /** 物料来源(material_resource_dict) */
-    @Excel(name = "物料来源(material_resource_dict)")
+    /** 物料来源 */
+    @Excel(name = "物料来源")
     private String materialResourceDict;
 
     /** 型号 */
@@ -46,8 +46,8 @@ public class BaseMaterial extends BaseEntity
     @Excel(name = "规格")
     private String specification;
 
-    /** 仓库(material_warehouse_code) */
-    @Excel(name = "仓库(material_warehouse_code)")
+    /** 仓库 */
+    @Excel(name = "仓库")
     private String materialWarehouseCode;
 
     /** 库存单位 */
