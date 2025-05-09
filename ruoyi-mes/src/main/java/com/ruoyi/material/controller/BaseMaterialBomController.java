@@ -52,9 +52,25 @@ public class BaseMaterialBomController extends BaseController
         return getDataTable(list);
     }
 
+    /**
+     * 查询对应的物料下的BOM Tree列表
+     * @param productCode
+     * @return
+     */
     @GetMapping(value = "/{productCode}")
     public AjaxResult bomTree(@PathVariable("productCode") String productCode)
     {
         return success(baseMaterialBomService.selectBomTreeList(productCode));
+    }
+
+    /**
+     * 查询对应的物料下的BOM列表
+     * @param productCode
+     * @return
+     */
+    @GetMapping(value = "/boms/{productCode}")
+    public AjaxResult bomsList(@PathVariable("productCode") String productCode)
+    {
+        return success(baseMaterialBomService.selectBaseMaterialBomList(productCode));
     }
 }
