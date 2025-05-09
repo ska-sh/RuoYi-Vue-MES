@@ -2,6 +2,9 @@ package com.ruoyi.material.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.common.core.domain.entity.SysDept;
+import com.ruoyi.material.service.IBaseMaterialBomService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +37,9 @@ public class BaseMaterialBomController extends BaseController
     @Autowired
     private IBaseMaterialService baseMaterialService;
 
+    @Autowired
+    private IBaseMaterialBomService baseMaterialBomService;
+
     /**
      * 查询物料管理列表
      */
@@ -44,5 +50,11 @@ public class BaseMaterialBomController extends BaseController
         startPage();
         List<BaseMaterial> list = baseMaterialService.selectBaseMaterialList(baseMaterial);
         return getDataTable(list);
+    }
+
+    @GetMapping(value = "/{productCode}")
+    public AjaxResult bomTree(@PathVariable("productCode") String productCode)
+    {
+        return success(baseMaterialBomService.selectBomTreeList(productCode));
     }
 }

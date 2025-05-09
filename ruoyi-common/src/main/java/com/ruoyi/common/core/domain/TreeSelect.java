@@ -36,6 +36,16 @@ public class TreeSelect implements Serializable
 
     }
 
+    public TreeSelect(Long id, String label, Boolean disabled, List<TreeSelect> children)
+    {
+        this.id = id;
+        this.label = label;
+        if(disabled != null){
+            this.disabled = disabled;
+        }
+        this.children = children;
+    }
+
     public TreeSelect(SysDept dept)
     {
         this.id = dept.getDeptId();

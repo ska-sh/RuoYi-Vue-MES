@@ -56,7 +56,7 @@ public class BaseMaterialServiceImpl implements IBaseMaterialService
     @Override
     public AjaxResult insertBaseMaterial(BaseMaterial baseMaterial)
     {
-        BaseMaterial record = baseMaterialMapper.selectBaseMaterialByCode(baseMaterial.getCode());
+        BaseMaterial record = selectBaseMaterialByCode(baseMaterial.getCode());
         if(record != null){
             return AjaxResult.error(baseMaterial.getCode()+"编号已存在!");
         }
@@ -103,5 +103,10 @@ public class BaseMaterialServiceImpl implements IBaseMaterialService
     public int deleteBaseMaterialById(Long id)
     {
         return baseMaterialMapper.deleteBaseMaterialById(id);
+    }
+
+    @Override
+    public BaseMaterial selectBaseMaterialByCode(String code) {
+        return baseMaterialMapper.selectBaseMaterialByCode(code);
     }
 }

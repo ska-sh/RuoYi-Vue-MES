@@ -17,8 +17,13 @@ public interface BaseMaterialMapper
      * @param id 物料管理主键
      * @return 物料管理
      */
-    public BaseMaterial selectBaseMaterialById(Long id);
+    BaseMaterial selectBaseMaterialById(Long id);
 
+    /**
+     * 通过物料编码查询物料信息
+     * @param code 物料编码
+     * @return 返回物料信息
+     */
     BaseMaterial selectBaseMaterialByCode(String code);
 
     /**

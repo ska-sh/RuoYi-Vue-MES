@@ -60,4 +60,11 @@ public interface IBaseMaterialService
      * @return 结果
      */
     public int deleteBaseMaterialById(Long id);
+
+    /**
+     * 通过物料编码查询物料信息
+     * @param code 物料编码
+     * @return 返回物料信息
+     */
+    BaseMaterial selectBaseMaterialByCode(String code);
 }
