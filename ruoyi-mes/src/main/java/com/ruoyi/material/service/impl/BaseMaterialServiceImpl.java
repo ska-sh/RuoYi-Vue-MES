@@ -109,4 +109,9 @@ public class BaseMaterialServiceImpl implements IBaseMaterialService
     public BaseMaterial selectBaseMaterialByCode(String code) {
         return baseMaterialMapper.selectBaseMaterialByCode(code);
     }
+
+    @Override
+    public BaseMaterial selectBaseMaterialByName(String name) {
+        return baseMaterialMapper.selectBaseMaterialByName(name);
+    }
 }

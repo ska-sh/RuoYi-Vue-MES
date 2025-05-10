@@ -65,4 +65,12 @@ public interface BaseMaterialMapper
      * @return 结果
      */
     public int deleteBaseMaterialByIds(Long[] ids);
+
+    /**
+     * 查询物料管理
+     *
+     * @param name 物料名称
+     * @return 物料管理
+     */
+    BaseMaterial selectBaseMaterialByName(String name);
 }

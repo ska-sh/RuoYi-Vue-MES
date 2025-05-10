@@ -67,4 +67,11 @@ public interface IBaseMaterialService
      * @return 返回物料信息
      */
     BaseMaterial selectBaseMaterialByCode(String code);
+
+    /**
+     * 查询物料管理
+     * @param name 物料名称
+     * @return 物料管理
+     */
+    BaseMaterial selectBaseMaterialByName(String name);
 }
