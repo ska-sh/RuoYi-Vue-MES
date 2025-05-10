@@ -35,6 +35,11 @@ public class BaseTechnologyConfigServiceImpl implements IBaseTechnologyConfigSer
         return baseTechnologyConfigMapper.selectBaseTechnologyConfigById(id);
     }
 
+    @Override
+    public BaseTechnologyConfig selectBaseTechnologyConfigByCode(String code) {
+        return baseTechnologyConfigMapper.selectOneByCode(code);
+    }
+
     /**
      * 查询基础工艺列表
      * 
@@ -60,6 +65,12 @@ public class BaseTechnologyConfigServiceImpl implements IBaseTechnologyConfigSer
         if(record != null){
             return AjaxResult.error(baseTechnologyConfig.getCode()+"编号已存在!");
         }
+
+        BaseTechnologyConfig record1 = baseTechnologyConfigMapper.selecOneByName(baseTechnologyConfig.getName());
+        if(record1 != null){
+            return AjaxResult.error(baseTechnologyConfig.getName()+"工艺已存在!");
+        }
+
         baseTechnologyConfig.setCreateTime(DateUtils.getNowDate());
         baseTechnologyConfig.setCreateBy(SecurityUtils.getLoginUser().getUsername());
         int rows = baseTechnologyConfigMapper.insertBaseTechnologyConfig(baseTechnologyConfig);

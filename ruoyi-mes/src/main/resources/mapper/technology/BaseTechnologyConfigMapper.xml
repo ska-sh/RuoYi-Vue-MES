@@ -38,9 +38,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectBaseTechnologyConfigVo"/>
         where id = #{id}
     </select>
-    <select id="selectOneByCode" resultType="com.ruoyi.technology.domain.BaseTechnologyConfig">
+    <select id="selectOneByCode" resultMap="BaseTechnologyConfigResult">
         <include refid="selectBaseTechnologyConfigVo"/>
         where code = #{code}
+    </select>
+
+    <select id="selecOneByName" resultMap="BaseTechnologyConfigResult">
+        <include refid="selectBaseTechnologyConfigVo"/>
+        where name = #{name}
     </select>
 
     <insert id="insertBaseTechnologyConfig" parameterType="com.ruoyi.technology.domain.BaseTechnologyConfig" useGeneratedKeys="true" keyProperty="id">

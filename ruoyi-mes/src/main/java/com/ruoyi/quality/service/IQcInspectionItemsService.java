@@ -1,6 +1,8 @@
 package com.ruoyi.quality.service;
 
 import java.util.List;
+
+import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.quality.domain.QcInspectionItems;
 
 /**
@@ -33,7 +35,7 @@ public interface IQcInspectionItemsService
      * @param qcInspectionItems 检验项目
      * @return 结果
      */
-    public int insertQcInspectionItems(QcInspectionItems qcInspectionItems);
+    public AjaxResult insertQcInspectionItems(QcInspectionItems qcInspectionItems);
 
     /**
      * 修改检验项目

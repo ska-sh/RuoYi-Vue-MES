@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.material.domain.BaseMaterial;
 import com.ruoyi.material.service.IBaseMaterialService;
 import org.springframework.beans.BeanUtils;
@@ -61,11 +62,18 @@ public class QcProductInspectionStandardsServiceImpl implements IQcProductInspec
     @Override
     public AjaxResult insertQcProductInspectionStandards(QcProductInspectionStandards qcProductInspectionStandards)
     {
+        QcProductInspectionStandards record = qcProductInspectionStandardsMapper.selectQcProductInspectionStandardsByCode(qcProductInspectionStandards.getCode());
+
+        if(record != null){
+            return AjaxResult.error(qcProductInspectionStandards.getCode() + "物料已存在质检标准!");
+        }
+
         BaseMaterial baseMaterial = baseMaterialService.selectBaseMaterialByCode(qcProductInspectionStandards.getCode());
         if(baseMaterial == null){
-            return AjaxResult.error(qcProductInspectionStandards.getCode() + "物料信息不存在!");
+            return AjaxResult.error(qcProductInspectionStandards.getCode() + "物料不存在!");
         }
         BeanUtils.copyProperties(baseMaterial, qcProductInspectionStandards);
+        qcProductInspectionStandards.setCreateBy(SecurityUtils.getLoginUser().getUsername());
         qcProductInspectionStandards.setCreateTime(DateUtils.getNowDate());
         int rows = qcProductInspectionStandardsMapper.insertQcProductInspectionStandards(qcProductInspectionStandards);
         return rows > 0 ? AjaxResult.success() : AjaxResult.error();
@@ -92,6 +100,7 @@ public class QcProductInspectionStandardsServiceImpl implements IQcProductInspec
         BeanUtils.copyProperties(baseMaterial, qcProductInspectionStandards);
         qcProductInspectionStandards.setId(standardId);
         qcProductInspectionStandards.setUpdateTime(DateUtils.getNowDate());
+        qcProductInspectionStandards.setUpdateBy(SecurityUtils.getLoginUser().getUsername());
         int rows = qcProductInspectionStandardsMapper.updateQcProductInspectionStandards(qcProductInspectionStandards);
         return rows > 0 ? AjaxResult.success() : AjaxResult.error();
     }

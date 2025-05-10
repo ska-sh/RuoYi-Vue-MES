@@ -32,6 +32,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectQcInspectionItemsVo"/>
         where id = #{id}
     </select>
+    <select id="selectQcInspectionItemsByName" resultMap="QcInspectionItemsResult">
+        <include refid="selectQcInspectionItemsVo"/>
+        where name = #{name}
+    </select>
 
     <insert id="insertQcInspectionItems" parameterType="com.ruoyi.quality.domain.QcInspectionItems" useGeneratedKeys="true" keyProperty="id">
         insert into qc_inspection_items

@@ -35,6 +35,13 @@ public interface BaseTechnologyConfigMapper
     BaseTechnologyConfig selectOneByCode(String code);
 
     /**
+     * 查询基础工艺
+     * @param name 工艺名称
+     * @return 基础工艺
+     */
+    BaseTechnologyConfig selecOneByName(String name);
+
+    /**
      * 新增基础工艺
      * 
      * @param baseTechnologyConfig 基础工艺

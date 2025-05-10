@@ -20,6 +20,13 @@ public interface QcProductInspectionStandardsMapper
     public QcProductInspectionStandards selectQcProductInspectionStandardsById(Long id);
 
     /**
+     * 查询成品检验标准
+     * @param code 物料CODE
+     * @return 成品检验标准
+     */
+    QcProductInspectionStandards selectQcProductInspectionStandardsByCode(String code);
+
+    /**
      * 查询成品检验标准列表
      * 
      * @param qcProductInspectionStandards 成品检验标准

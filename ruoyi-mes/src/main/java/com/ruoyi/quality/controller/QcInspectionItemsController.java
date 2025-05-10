@@ -87,7 +87,7 @@ public class QcInspectionItemsController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody QcInspectionItems qcInspectionItems)
     {
-        return toAjax(qcInspectionItemsService.insertQcInspectionItems(qcInspectionItems));
+        return qcInspectionItemsService.insertQcInspectionItems(qcInspectionItems);
     }
 
     /**

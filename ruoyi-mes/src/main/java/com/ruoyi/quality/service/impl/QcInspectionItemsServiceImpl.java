@@ -1,7 +1,11 @@
 package com.ruoyi.quality.service.impl;
 
 import java.util.List;
+
+import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.SecurityUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.quality.mapper.QcInspectionItemsMapper;
@@ -47,14 +51,29 @@ public class QcInspectionItemsServiceImpl implements IQcInspectionItemsService
     /**
      * 新增检验项目
      * 
-     * @param qcInspectionItems 检验项目
+     * @param item 检验项目
      * @return 结果
      */
     @Override
-    public int insertQcInspectionItems(QcInspectionItems qcInspectionItems)
+    public AjaxResult insertQcInspectionItems(QcInspectionItems item)
     {
-        qcInspectionItems.setCreateTime(DateUtils.getNowDate());
-        return qcInspectionItemsMapper.insertQcInspectionItems(qcInspectionItems);
+
+        QcInspectionItems query = new QcInspectionItems();
+        query.setCode(item.getCode());
+        List<QcInspectionItems> list = qcInspectionItemsMapper.selectQcInspectionItemsList(query);
+        if(CollectionUtils.isNotEmpty(list)){
+            return AjaxResult.error(item.getCode() + "编号已存在!");
+        }
+
+        QcInspectionItems items = qcInspectionItemsMapper.selectQcInspectionItemsByName(item.getName());
+        if(items != null){
+            return AjaxResult.error(item.getName() + "质检项已存在!");
+        }
+
+        item.setCreateTime(DateUtils.getNowDate());
+        item.setCreateBy(SecurityUtils.getUsername());
+        int rows = qcInspectionItemsMapper.insertQcInspectionItems(item);
+        return rows > 0 ? AjaxResult.success() : AjaxResult.error();
     }
 
     /**
@@ -67,6 +86,7 @@ public class QcInspectionItemsServiceImpl implements IQcInspectionItemsService
     public int updateQcInspectionItems(QcInspectionItems qcInspectionItems)
     {
         qcInspectionItems.setUpdateTime(DateUtils.getNowDate());
+        qcInspectionItems.setUpdateBy(SecurityUtils.getUsername());
         return qcInspectionItemsMapper.updateQcInspectionItems(qcInspectionItems);
     }
 

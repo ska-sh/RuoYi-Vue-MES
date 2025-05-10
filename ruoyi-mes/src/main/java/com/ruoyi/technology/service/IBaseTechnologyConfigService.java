@@ -22,6 +22,13 @@ public interface IBaseTechnologyConfigService
     public BaseTechnologyConfig selectBaseTechnologyConfigById(Long id);
 
     /**
+     * 查询基础工艺
+     * @param code 工艺编号
+     * @return 基础工艺
+     */
+    BaseTechnologyConfig selectBaseTechnologyConfigByCode(String code);
+
+    /**
      * 查询基础工艺列表
      * 
      * @param baseTechnologyConfig 基础工艺

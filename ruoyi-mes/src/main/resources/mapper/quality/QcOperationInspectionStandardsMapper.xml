@@ -2,15 +2,17 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.quality.mapper.QcProductInspectionStandardsMapper">
+<mapper namespace="com.ruoyi.quality.mapper.QcOperationInspectionStandardsMapper">
     
-    <resultMap type="com.ruoyi.quality.domain.QcProductInspectionStandards" id="QcProductInspectionStandardsResult">
+    <resultMap type="com.ruoyi.quality.domain.QcOperationInspectionStandards" id="QcOperationInspectionStandardsResult">
         <result property="id"    column="id"    />
         <result property="code"    column="code"    />
         <result property="name"    column="name"    />
         <result property="figureNumber"    column="figure_number"    />
         <result property="model"    column="model"    />
         <result property="specification"    column="specification"    />
+        <result property="operationNumber"    column="operation_number"    />
+        <result property="operationName"    column="operation_name"    />
         <result property="delFlag"    column="del_flag"    />
         <result property="createBy"    column="create_by"    />
         <result property="createTime"    column="create_time"    />
@@ -19,39 +21,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="remark"    column="remark"    />
     </resultMap>
 
-    <sql id="selectQcProductInspectionStandardsVo">
-        select id, code, name, figure_number, model, specification, del_flag, create_by, create_time, update_by, update_time, remark from qc_product_inspection_standards
+    <sql id="selectQcOperationInspectionStandardsVo">
+        select id, code, name, figure_number, model, specification, operation_number, operation_name, del_flag, create_by, create_time, update_by, update_time, remark from qc_operation_inspection_standards
     </sql>
 
-    <select id="selectQcProductInspectionStandardsList" parameterType="com.ruoyi.quality.domain.QcProductInspectionStandards" resultMap="QcProductInspectionStandardsResult">
-        <include refid="selectQcProductInspectionStandardsVo"/>
+    <select id="selectQcOperationInspectionStandardsList" parameterType="com.ruoyi.quality.domain.QcOperationInspectionStandards" resultMap="QcOperationInspectionStandardsResult">
+        <include refid="selectQcOperationInspectionStandardsVo"/>
         <where>  
             <if test="code != null  and code != ''"> and code = #{code}</if>
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
             <if test="figureNumber != null  and figureNumber != ''"> and figure_number = #{figureNumber}</if>
             <if test="model != null  and model != ''"> and model = #{model}</if>
             <if test="specification != null  and specification != ''"> and specification = #{specification}</if>
+            <if test="operationNumber != null  and operationNumber != ''"> and operation_number = #{operationNumber}</if>
+            <if test="operationName != null  and operationName != ''"> and operation_name like concat('%', #{operationName}, '%')</if>
         </where>
     </select>
     
-    <select id="selectQcProductInspectionStandardsById" parameterType="Long" resultMap="QcProductInspectionStandardsResult">
-        <include refid="selectQcProductInspectionStandardsVo"/>
+    <select id="selectQcOperationInspectionStandardsById" parameterType="Long" resultMap="QcOperationInspectionStandardsResult">
+        <include refid="selectQcOperationInspectionStandardsVo"/>
         where id = #{id}
     </select>
-    <select id="selectQcProductInspectionStandardsByCode"
-            resultType="com.ruoyi.quality.domain.QcProductInspectionStandards" resultMap="QcProductInspectionStandardsResult">
-        <include refid="selectQcProductInspectionStandardsVo"/>
-        where code = #{code}
-    </select>
 
-    <insert id="insertQcProductInspectionStandards" parameterType="com.ruoyi.quality.domain.QcProductInspectionStandards" useGeneratedKeys="true" keyProperty="id">
-        insert into qc_product_inspection_standards
+    <insert id="insertQcOperationInspectionStandards" parameterType="com.ruoyi.quality.domain.QcOperationInspectionStandards" useGeneratedKeys="true" keyProperty="id">
+        insert into qc_operation_inspection_standards
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="code != null and code != ''">code,</if>
             <if test="name != null and name != ''">name,</if>
             <if test="figureNumber != null">figure_number,</if>
             <if test="model != null">model,</if>
             <if test="specification != null">specification,</if>
+            <if test="operationNumber != null and operationNumber != ''">operation_number,</if>
+            <if test="operationName != null and operationName != ''">operation_name,</if>
             <if test="delFlag != null">del_flag,</if>
             <if test="createBy != null">create_by,</if>
             <if test="createTime != null">create_time,</if>
@@ -65,6 +66,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="figureNumber != null">#{figureNumber},</if>
             <if test="model != null">#{model},</if>
             <if test="specification != null">#{specification},</if>
+            <if test="operationNumber != null and operationNumber != ''">#{operationNumber},</if>
+            <if test="operationName != null and operationName != ''">#{operationName},</if>
             <if test="delFlag != null">#{delFlag},</if>
             <if test="createBy != null">#{createBy},</if>
             <if test="createTime != null">#{createTime},</if>
@@ -74,14 +77,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updateQcProductInspectionStandards" parameterType="com.ruoyi.quality.domain.QcProductInspectionStandards">
-        update qc_product_inspection_standards
+    <update id="updateQcOperationInspectionStandards" parameterType="com.ruoyi.quality.domain.QcOperationInspectionStandards">
+        update qc_operation_inspection_standards
         <trim prefix="SET" suffixOverrides=",">
             <if test="code != null and code != ''">code = #{code},</if>
             <if test="name != null and name != ''">name = #{name},</if>
             <if test="figureNumber != null">figure_number = #{figureNumber},</if>
             <if test="model != null">model = #{model},</if>
             <if test="specification != null">specification = #{specification},</if>
+            <if test="operationNumber != null and operationNumber != ''">operation_number = #{operationNumber},</if>
+            <if test="operationName != null and operationName != ''">operation_name = #{operationName},</if>
             <if test="delFlag != null">del_flag = #{delFlag},</if>
             <if test="createBy != null">create_by = #{createBy},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
@@ -92,12 +97,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </update>
 
-    <delete id="deleteQcProductInspectionStandardsById" parameterType="Long">
-        delete from qc_product_inspection_standards where id = #{id}
+    <delete id="deleteQcOperationInspectionStandardsById" parameterType="Long">
+        delete from qc_operation_inspection_standards where id = #{id}
     </delete>
 
-    <delete id="deleteQcProductInspectionStandardsByIds" parameterType="String">
-        delete from qc_product_inspection_standards where id in 
+    <delete id="deleteQcOperationInspectionStandardsByIds" parameterType="String">
+        delete from qc_operation_inspection_standards where id in 
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

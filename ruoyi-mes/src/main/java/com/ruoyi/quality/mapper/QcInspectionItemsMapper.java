@@ -20,6 +20,13 @@ public interface QcInspectionItemsMapper
     public QcInspectionItems selectQcInspectionItemsById(Long id);
 
     /**
+     * 查询检验项目
+     * @param name 检验项
+     * @return 检验项目
+     */
+    QcInspectionItems selectQcInspectionItemsByName(String name);
+
+    /**
      * 查询检验项目列表
      * 
      * @param qcInspectionItems 检验项目
