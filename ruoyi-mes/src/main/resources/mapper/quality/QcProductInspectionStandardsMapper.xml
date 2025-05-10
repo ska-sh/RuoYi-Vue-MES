@@ -2,20 +2,15 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.material.mapper.BaseMaterialMapper">
+<mapper namespace="com.ruoyi.quality.mapper.QcProductInspectionStandardsMapper">
     
-    <resultMap type="com.ruoyi.material.domain.BaseMaterial" id="BaseMaterialResult">
+    <resultMap type="com.ruoyi.quality.domain.QcProductInspectionStandards" id="QcProductInspectionStandardsResult">
         <result property="id"    column="id"    />
         <result property="code"    column="code"    />
         <result property="name"    column="name"    />
         <result property="figureNumber"    column="figure_number"    />
-        <result property="type"    column="type"    />
-        <result property="materialResourceDict"    column="material_resource_dict"    />
         <result property="model"    column="model"    />
         <result property="specification"    column="specification"    />
-        <result property="materialWarehouseCode"    column="material_warehouse_code"    />
-        <result property="stockUnitDict"    column="stock_unit_dict"    />
-        <result property="status"    column="status"    />
         <result property="delFlag"    column="del_flag"    />
         <result property="createBy"    column="create_by"    />
         <result property="createTime"    column="create_time"    />
@@ -24,47 +19,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="remark"    column="remark"    />
     </resultMap>
 
-    <sql id="selectBaseMaterialVo">
-        select id, code, name, figure_number, type, material_resource_dict, model, specification, material_warehouse_code, stock_unit_dict, status, del_flag, create_by, create_time, update_by, update_time, remark from base_material
+    <sql id="selectQcProductInspectionStandardsVo">
+        select id, code, name, figure_number, model, specification, del_flag, create_by, create_time, update_by, update_time, remark from qc_product_inspection_standards
     </sql>
 
-    <select id="selectBaseMaterialList" parameterType="com.ruoyi.material.domain.BaseMaterial" resultMap="BaseMaterialResult">
-        <include refid="selectBaseMaterialVo"/>
+    <select id="selectQcProductInspectionStandardsList" parameterType="com.ruoyi.quality.domain.QcProductInspectionStandards" resultMap="QcProductInspectionStandardsResult">
+        <include refid="selectQcProductInspectionStandardsVo"/>
         <where>  
-            <if test="code != null  and code != ''"> and code like concat('%', #{code}, '%')</if>
+            <if test="code != null  and code != ''"> and code = #{code}</if>
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
             <if test="figureNumber != null  and figureNumber != ''"> and figure_number = #{figureNumber}</if>
-            <if test="type != null  and type != ''"> and type = #{type}</if>
-            <if test="materialResourceDict != null  and materialResourceDict != ''"> and material_resource_dict = #{materialResourceDict}</if>
             <if test="model != null  and model != ''"> and model = #{model}</if>
             <if test="specification != null  and specification != ''"> and specification = #{specification}</if>
-            <if test="materialWarehouseCode != null  and materialWarehouseCode != ''"> and material_warehouse_code = #{materialWarehouseCode}</if>
-            <if test="stockUnitDict != null  and stockUnitDict != ''"> and stock_unit_dict = #{stockUnitDict}</if>
         </where>
     </select>
     
-    <select id="selectBaseMaterialById" parameterType="Long" resultMap="BaseMaterialResult">
-        <include refid="selectBaseMaterialVo"/>
+    <select id="selectQcProductInspectionStandardsById" parameterType="Long" resultMap="QcProductInspectionStandardsResult">
+        <include refid="selectQcProductInspectionStandardsVo"/>
         where id = #{id}
     </select>
-    <select id="selectBaseMaterialByCode" resultMap="BaseMaterialResult">
-        <include refid="selectBaseMaterialVo"/>
-        where code = #{code}
-    </select>
 
-    <insert id="insertBaseMaterial" parameterType="com.ruoyi.material.domain.BaseMaterial" useGeneratedKeys="true" keyProperty="id">
-        insert into base_material
+    <insert id="insertQcProductInspectionStandards" parameterType="com.ruoyi.quality.domain.QcProductInspectionStandards" useGeneratedKeys="true" keyProperty="id">
+        insert into qc_product_inspection_standards
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="code != null and code != ''">code,</if>
             <if test="name != null and name != ''">name,</if>
             <if test="figureNumber != null">figure_number,</if>
-            <if test="type != null and type != ''">type,</if>
-            <if test="materialResourceDict != null and materialResourceDict != ''">material_resource_dict,</if>
             <if test="model != null">model,</if>
             <if test="specification != null">specification,</if>
-            <if test="materialWarehouseCode != null and materialWarehouseCode != ''">material_warehouse_code,</if>
-            <if test="stockUnitDict != null and stockUnitDict != ''">stock_unit_dict,</if>
-            <if test="status != null">status,</if>
             <if test="delFlag != null">del_flag,</if>
             <if test="createBy != null">create_by,</if>
             <if test="createTime != null">create_time,</if>
@@ -76,13 +58,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="code != null and code != ''">#{code},</if>
             <if test="name != null and name != ''">#{name},</if>
             <if test="figureNumber != null">#{figureNumber},</if>
-            <if test="type != null and type != ''">#{type},</if>
-            <if test="materialResourceDict != null and materialResourceDict != ''">#{materialResourceDict},</if>
             <if test="model != null">#{model},</if>
             <if test="specification != null">#{specification},</if>
-            <if test="materialWarehouseCode != null and materialWarehouseCode != ''">#{materialWarehouseCode},</if>
-            <if test="stockUnitDict != null and stockUnitDict != ''">#{stockUnitDict},</if>
-            <if test="status != null">#{status},</if>
             <if test="delFlag != null">#{delFlag},</if>
             <if test="createBy != null">#{createBy},</if>
             <if test="createTime != null">#{createTime},</if>
@@ -92,19 +69,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updateBaseMaterial" parameterType="com.ruoyi.material.domain.BaseMaterial">
-        update base_material
+    <update id="updateQcProductInspectionStandards" parameterType="com.ruoyi.quality.domain.QcProductInspectionStandards">
+        update qc_product_inspection_standards
         <trim prefix="SET" suffixOverrides=",">
             <if test="code != null and code != ''">code = #{code},</if>
             <if test="name != null and name != ''">name = #{name},</if>
             <if test="figureNumber != null">figure_number = #{figureNumber},</if>
-            <if test="type != null and type != ''">type = #{type},</if>
-            <if test="materialResourceDict != null and materialResourceDict != ''">material_resource_dict = #{materialResourceDict},</if>
             <if test="model != null">model = #{model},</if>
             <if test="specification != null">specification = #{specification},</if>
-            <if test="materialWarehouseCode != null and materialWarehouseCode != ''">material_warehouse_code = #{materialWarehouseCode},</if>
-            <if test="stockUnitDict != null and stockUnitDict != ''">stock_unit_dict = #{stockUnitDict},</if>
-            <if test="status != null">status = #{status},</if>
             <if test="delFlag != null">del_flag = #{delFlag},</if>
             <if test="createBy != null">create_by = #{createBy},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
@@ -115,12 +87,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </update>
 
-    <delete id="deleteBaseMaterialById" parameterType="Long">
-        delete from base_material where id = #{id}
+    <delete id="deleteQcProductInspectionStandardsById" parameterType="Long">
+        delete from qc_product_inspection_standards where id = #{id}
     </delete>
 
-    <delete id="deleteBaseMaterialByIds" parameterType="String">
-        delete from base_material where id in 
+    <delete id="deleteQcProductInspectionStandardsByIds" parameterType="String">
+        delete from qc_product_inspection_standards where id in 
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
